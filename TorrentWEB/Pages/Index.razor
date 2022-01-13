@@ -1,0 +1,22 @@
+@page "/"
+@using TorrentWEB.Core.Parse
+@using TorrentWEB.Core.Sites
+@inject Blazored.SessionStorage.ISessionStorageService _storageService
+@inject HtmlLoader _loader
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<h1>@answer</h1>
+<SurveyPrompt Title="How is Blazor working for you?"/>
+
+@code
+{
+    string answer = null;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        answer = _loader.GetHtmlByPage().Result;
+       StateHasChanged();
+        base.OnAfterRender(firstRender);
+    }
+}
