@@ -5,6 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="11.0.0" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
       <PackageReference Include="BencodeNET" Version="4.0.0" />
       <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
       <PackageReference Include="Verify.AngleSharp" Version="3.0.0" />

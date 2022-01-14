@@ -7,7 +7,7 @@ namespace TorrentWEB.Core.Parse
 {
     public class UsualParse
     {
-        string[] GetObjects(IHtmlDocument document,ISettingsParse settingsParse)
+       public string[] GetObjects(IHtmlDocument document)
         {
             var list = new List<string>();
             var items = document.QuerySelectorAll("")
@@ -20,7 +20,7 @@ namespace TorrentWEB.Core.Parse
             return list.ToArray();
         }
 
-        string[]  GetCountPages(IHtmlDocument document,ISettingsParse settingsParse)
+       public  string[]  GetCountPages(IHtmlDocument document)
         {
             var list = new List<string>();
             var items = document.QuerySelectorAll("")

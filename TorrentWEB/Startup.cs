@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TorrentWEB.Core;
 using TorrentWEB.Core.Parse;
 using TorrentWEB.Core.Sites;
 using TorrentWEB.Data;
@@ -36,8 +37,11 @@ namespace TorrentWEB
             services.AddBlazoredSessionStorage();
             
             services.AddSingleton(typeof(HtmlLoader));
+            services.AddAutoMapper(typeof(ConfigureMapping));
        //     services.AddHttpClient(typeof(WeatherForecastService).ToString());
+       
             services.AddHttpClient();
+            
             //   services.AddTransient(typeof(TorrentService));
         }
 

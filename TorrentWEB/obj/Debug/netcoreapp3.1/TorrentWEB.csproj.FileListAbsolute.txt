@@ -127,3 +127,5 @@ D:\пробы\blazor\TorrentWEB\TorrentWEB\bin\Debug\netcoreapp3.1\runtimes\unix
 D:\пробы\blazor\TorrentWEB\TorrentWEB\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\пробы\blazor\TorrentWEB\TorrentWEB\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Verify.Attributes.cs
+D:\пробы\blazor\TorrentWEB\TorrentWEB\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\пробы\blazor\TorrentWEB\TorrentWEB\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
