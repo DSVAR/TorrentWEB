@@ -12,4 +12,8 @@
       <PackageReference Include="Verify.AngleSharp" Version="3.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\LittleComponents" />
+    </ItemGroup>
+
 </Project>

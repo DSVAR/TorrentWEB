@@ -1,36 +1,90 @@
 using System.Collections.Generic;
 using System.Linq;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
 using TorrentWEB.Core.Interfaces;
+using TorrentWEB.Core.Sites;
+using TorrentWEB.Models;
 
 namespace TorrentWEB.Core.Parse
 {
     public class UsualParse
     {
-       public string[] GetObjects(IHtmlDocument document)
+        private HtmlParser _html;
+  //      private List<string> _list;
+        private Cart _usual;
+        private List<Cart> _pars;
+        public UsualParse(HtmlParser html,Cart usual)
         {
-            var list = new List<string>();
-            var items = document.QuerySelectorAll("")
-                .Where(item => item.ClassName != null && item.ClassName == " ");
+            _html = html;
+            _usual = usual;
+        }
+        
+       public List<Cart> GetObjects(IHtmlDocument document,UsualSetting setting)
+       {
+           if (_pars==null)
+           {
+               _pars = new List<Cart>();
+           }
+           else
+           {
+               _pars.Clear();
+           }
+           
+           
+            var items = document.QuerySelectorAll(setting.TagOfItem)
+                .Where(item => item.ClassName == setting.ClassItems);
+            
             foreach (var item in items)
             {
-                list.Add(item.TextContent);
+                var doc = _html.ParseDocument( item.InnerHtml);
+                
+                var na = doc.GetElementsByClassName(setting.ClassOfObject);//родитель объекта
+                var itemPhoto = doc.QuerySelectorAll(setting.ParentTagPhoto);//родитель фото
+                var rating = doc.GetElementById(setting.ParentTagRating);
+                var hrefChild = na[0].QuerySelectorAll(setting.ParentTagHrefFilm).OfType<IHtmlAnchorElement>().ToArray();
+                
+                
+                var photo = itemPhoto[0].QuerySelectorAll(setting.ChildTagPhoto)
+                    .Select(atr=>atr.GetAttribute(setting.AttributePhoto)).ToArray().Where(at=>at!=null).ToArray();//ссылка на фото
+                
+
+               // var despriptionChild = item.TextContent;
+                
+                _usual.Rating = rating.TextContent;
+                _usual.Name = na[0].TextContent;//получении текста фильма
+                _usual.Href = hrefChild[0].Href.Remove(0,9);//ссылнка на фильм
+                _usual.PhotoUrl = photo[0];
+               
+                
+                
+                _pars.Add(_usual);
+                
+                _usual = new Cart();
+
             }
 
-            return list.ToArray();
+            return _pars;
         }
 
-       public  string[]  GetCountPages(IHtmlDocument document)
+       public  int GetCountPages(IHtmlDocument document,UsualSetting setting)
         {
-            var list = new List<string>();
-            var items = document.QuerySelectorAll("")
-                .Where(item => item.ClassName != null && item.ClassName == " "); 
+            var list = new List<int>();
+            var items = document.QuerySelectorAll("a")
+                .Select(atr=>atr.GetAttribute("href")).ToArray().Where(atr=>atr.Contains("page/")).Distinct();
+         
+            
+            
             foreach (var item in items)
             {
-                list.Add(item.TextContent);
+                var text = item.Trim(new char[]{'/'});
+                text = text.Replace("page/","");
+                 list.Add(int.Parse(text));
             }
 
-            return list.ToArray();
+
+            return list.Max();
         }
     }
 }

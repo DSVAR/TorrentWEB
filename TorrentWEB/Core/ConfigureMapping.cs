@@ -9,6 +9,8 @@ namespace TorrentWEB.Core
         {
             CreateMap<UsualSetting, Kinozavl>();
             CreateMap< Kinozavl,UsualSetting>();
+            CreateMap< TorrLafa,UsualSetting>();
+            CreateMap<UsualSetting, TorrLafa>();
         }
     }
 }

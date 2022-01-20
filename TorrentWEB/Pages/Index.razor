@@ -2,25 +2,45 @@
 @using TorrentWEB.Core.Parse
 @using TorrentWEB.Core.Sites
 @using AutoMapper
+@using TorrentWEB.Components.BigComponents
+@using TorrentWEB.Models
 @inject Blazored.SessionStorage.ISessionStorageService _storageService
 @inject HtmlLoader _loader
- @inject IMapper _mapper
+@inject IMapper _mapper
+@inject UsualParse _parse
  
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 <h1>@answer</h1>
+
+<div class="miha">
+    <h1>suka bleat</h1>
+</div>
+
 <SurveyPrompt Title="How is Blazor working for you?"/>
 
 @code
 {
-    string answer = null;
-    Kinozavl _kinozavl=new Kinozavl();
+    List<Cart> answer = null;
+    int countPages = 0;
+    TorrLafa _kinozavl=new TorrLafa();
+    
     protected override void OnAfterRender(bool firstRender)
     { 
-        var map = _mapper.Map<UsualSetting>(_kinozavl);
-        answer = _loader.GetHtmlByPage(map).Result;
-       StateHasChanged();
-        base.OnAfterRender(firstRender);
+        if(firstRender){
+            var map = _mapper.Map<UsualSetting>(_kinozavl);
+            
+            var html = _loader.GetHtmlByPage(map).Result;
+
+            if (html != null)
+            {
+                answer = _parse.GetObjects(html, map);
+                countPages = _parse.GetCountPages(html, map);
+            }
+            
+           StateHasChanged();
+        }
+       // base.OnAfterRender(firstRender);
     }
 }

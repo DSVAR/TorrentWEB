@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AngleSharp.Html.Parser;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -11,9 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TorrentWEB.Core;
+using TorrentWEB.Core.Interfaces;
 using TorrentWEB.Core.Parse;
 using TorrentWEB.Core.Sites;
 using TorrentWEB.Data;
+using TorrentWEB.Models;
 
 namespace TorrentWEB
 {
@@ -36,11 +39,18 @@ namespace TorrentWEB
 
             services.AddBlazoredSessionStorage();
             
-            services.AddSingleton(typeof(HtmlLoader));
+            services.AddSingleton<HtmlLoader>();
+            services.AddSingleton(typeof(UsualParse));
+            services.AddSingleton<HtmlParser>();
+          
             services.AddAutoMapper(typeof(ConfigureMapping));
+            services.AddHttpClient();
+            
+            
+            services.AddSingleton<Cart>();
        //     services.AddHttpClient(typeof(WeatherForecastService).ToString());
        
-            services.AddHttpClient();
+            
             
             //   services.AddTransient(typeof(TorrentService));
         }
