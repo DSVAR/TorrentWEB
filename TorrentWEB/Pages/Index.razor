@@ -8,39 +8,87 @@
 @inject HtmlLoader _loader
 @inject IMapper _mapper
 @inject UsualParse _parse
- 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
-<h1>@answer</h1>
 
-<div class="miha">
-    <h1>suka bleat</h1>
-</div>
+@inject IJSRuntime _runtime
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+@if (!_load)
+{
+    <Film Items="@_itemPage"/>
+    <Paginator Update="async () => {  await GetItems(); await UpdateFilm(); }"  CurrentPage="_currentPage" MaxElements="countPages"/>
+}
+else
+{
+    <img src="https://i.pinimg.com/originals/f7/57/de/f757de576d93cdc33eff53536e7acc8f.gif"/>
+}
 
 @code
 {
-    List<Cart> answer = null;
+    List<Cart> _itemPage = null;
     int countPages = 0;
-    TorrLafa _kinozavl=new TorrLafa();
-    
-    protected override void OnAfterRender(bool firstRender)
-    { 
-        if(firstRender){
-            var map = _mapper.Map<UsualSetting>(_kinozavl);
-            
-            var html = _loader.GetHtmlByPage(map).Result;
+    TorrLafa _kinozavl = new TorrLafa();
+    int _currentPage = 0;
+    bool _load = false;
+    UsualSetting _map;
 
-            if (html != null)
-            {
-                answer = _parse.GetObjects(html, map);
-                countPages = _parse.GetCountPages(html, map);
-            }
-            
-           StateHasChanged();
+    protected override async Task OnInitializedAsync()
+    {
+        _load = true;
+        await GetItems();
+
+        _map = _mapper.Map<UsualSetting>(_kinozavl);
+
+        if (_itemPage == null && countPages == 0 && _currentPage == 0)
+        {
+            await SetItems();
+            await UpdateFilm();
         }
-       // base.OnAfterRender(firstRender);
+        else
+        {
+            await UpdateFilm();
+        }
+        
+        
+        StateHasChanged();
+        _load = false;
     }
+
+    
+
+    private async Task SetItems()
+    {
+        await _storageService.SetItemAsync("CurrentPage", 0);
+    }
+
+    private async Task GetItems()
+    {
+        _itemPage = await _storageService.GetItemAsync<List<Cart>>("ItemPage");
+        countPages = await _storageService.GetItemAsync<int>("CountPage");
+        _currentPage = await _storageService.GetItemAsync<int>("CurrentPage");
+    }
+    
+     async Task UpdateFilm()
+     {
+         try
+         {
+             _currentPage = await _storageService.GetItemAsync<int>("CurrentPage");
+             var html = _loader.GetHtmlByPage(_map,_currentPage).Result;
+
+             if (html != null)
+             {
+                 _itemPage = _parse.GetObjects(html, _map);
+                 countPages = _parse.GetCountPages(html, _map);
+                 await _storageService.SetItemAsync("ItemPage", _itemPage);
+                 await _storageService.SetItemAsync("CountPage", countPages);
+             }
+         }
+         catch (Exception e)
+         {
+             await _runtime.InvokeAsync<string>("console.log('swer')");
+         }
+         StateHasChanged();
+        
+    }
+    
+
 }

@@ -3,6 +3,10 @@ namespace TorrentWEB.Core.Interfaces
     public interface ISettingsParse
     {
         string BaseUrl { get; set; }
+        
+        public  string UrlPhoto { get; set; }
+        string PrefixPage { get; set; }
+        
         string Prefix { get; set; }
         string Description { get; set; }
         string ClassPages { get; set; }

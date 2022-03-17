@@ -5,6 +5,8 @@ namespace TorrentWEB.Core.Sites
     public class UsualSetting:ISettingsParse
     {
         public string BaseUrl { get; set; }
+        public  string UrlPhoto { get; set; }
+        public string PrefixPage { get; set; }
         public string Prefix { get; set; }
         public string Description { get; set; }
         public string ClassPages { get; set; }

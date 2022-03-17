@@ -98,6 +98,8 @@ D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\TorrentWEB.Mv
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\TorrentWEB.RazorComponent.input.cache
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\App.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\BigComponents\Film.razor.g.cs
+D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\BigComponents\Paginator.razor.g.cs
+D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\LittleComponents\Button.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Counter.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\FetchData.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
@@ -111,6 +113,8 @@ D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\TorrentWEB.Ta
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\TorrentWEB.RazorCoreGenerate.cache
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\App.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Components\BigComponents\Film.razor.g.cs
+D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Components\BigComponents\Paginator.razor.g.cs
+D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Components\LittleComponents\Button.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Pages\Counter.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Pages\FetchData.razor.g.cs
 D:\пробы\blazor\TorrentWEB\TorrentWEB\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs

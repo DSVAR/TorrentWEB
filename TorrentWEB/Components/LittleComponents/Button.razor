@@ -1,0 +1,22 @@
+@inject IJSRuntime _runtime
+
+<button  @onclick="()=>ClickChild(Id)" class="page_button @ClassName" href=@Href id=@Id>@Value</button>
+
+@code {
+
+    [Parameter]
+    public string Href { get; set; } = "https://ya.ru";
+    [Parameter]
+    public string Value { get; set; }
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public Action<int> ClickChild { get; set; } 
+    [Parameter]
+    public string ClassName { get; set; } 
+
+
+
+
+
+}

@@ -1,0 +1,39 @@
+.grid_third_item{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto ;
+}
+
+.grid_third_item img{
+    height: 25vh;
+    width: auto;
+}
+@media  (min-width:400px) and (max-width: 800px){
+    .grid_third_item img{
+        height: 15vh;
+        width: auto;
+    }
+    p{
+        color:red;
+    }
+}
+
+.grid_second_item{
+    display: grid;
+    grid-template-columns: auto auto;
+padding: 1.5vh 2vw 1.5vh 2vw;
+}
+
+.left_align{
+    text-align: left;
+}
+.right_align{
+    text-align: right;
+}
+
+.border_solid{
+    border: solid #D6D0CE 0.15vw;
+    padding: 0.2vw;
+    text-align: center;
+    margin: 0.3vw;
+}
+

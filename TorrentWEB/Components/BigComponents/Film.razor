@@ -1,7 +1,45 @@
-<h3>Film</h3>
-<div class="chlen">
-    <h1>pidr</h1>
-</div>
+@using TorrentWEB.Models
+@inject IJSRuntime _runtime
+
+@{
+    if (Items != null)
+    {
+        <h3>Film</h3>
+        <div class="grid_third_item">
+
+            @foreach (var item in Items)
+            {
+                <div @onclick="()=>ClickDiv(item)" class="border_solid">
+                    @* фото *@
+                    <img src="@item.PhotoUrl"/>
+                    <div class="grid_second_item">
+                        <div class="left_align">
+                            <p>@item.Name</p>
+                        </div>
+                        <div class="right_align">
+                            <p>оценка:@item.Rating</p>
+                        </div>
+                    </div>
+
+
+                    <p>@item.Description</p>
+                </div>
+            }
+        </div>
+    }
+}
+
 @code {
+
+    [Parameter]
+    public List<Cart> Items { get; set; }
+
     
+
+    private void ClickDiv(Cart item)
+    {
+        _runtime.InvokeVoidAsync("console.log",item);
+    }
+
+
 }

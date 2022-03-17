@@ -1,45 +1,54 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.AspNetCore.Http;
-using TorrentWEB.Core.Interfaces;
+using AngleSharp.Io;
 using TorrentWEB.Core.Sites;
-using TorrentWEB.Models;
+using HttpMethod = System.Net.Http.HttpMethod;
 
 namespace TorrentWEB.Core.Parse
 {
     public class HtmlLoader
     {
         private IHttpClientFactory _client;
-        private readonly UsualParse _parse;
-
-        public HtmlLoader(IHttpClientFactory client, UsualParse parse)
+        
+        public HtmlLoader(IHttpClientFactory client)
         {
             _client = client;
-            _parse = parse;
         }
 
-        public async Task<IHtmlDocument> GetHtmlByPage(UsualSetting setting)
+        public async Task<IHtmlDocument> GetHtmlByPage(UsualSetting setting,int currentPage)
         {
-            var client = _client.CreateClient();
-            var response = client.GetAsync(setting.BaseUrl).Result;
-
-            if (response.StatusCode==HttpStatusCode.OK)
+            try
             {
-                var content = response.Content.ReadAsStreamAsync().Result;
+                var client = _client.CreateClient();
 
-                if (content != null)
+                
+                var response =  await client.GetAsync(setting.BaseUrl + setting.Prefix + setting.PrefixPage + currentPage).ConfigureAwait(false);
+                
+            
+                if (response.StatusCode==HttpStatusCode.OK)
                 {
-                    var p = new HtmlParser();
-                    return p.ParseDocument(content);
+                    var content = await response.Content.ReadAsStreamAsync();
+
+                    if (content != null)
+                    {
+                        var p = new HtmlParser();
+                        return p.ParseDocument(content);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                var p = 2;
+            }
+           
 
             return null;
+            
         }
     }
 }

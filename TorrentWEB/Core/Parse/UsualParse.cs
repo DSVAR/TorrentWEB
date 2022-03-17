@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using AngleSharp.Text;
 using TorrentWEB.Core.Interfaces;
 using TorrentWEB.Core.Sites;
 using TorrentWEB.Models;
@@ -55,7 +57,7 @@ namespace TorrentWEB.Core.Parse
                 _usual.Rating = rating.TextContent;
                 _usual.Name = na[0].TextContent;//получении текста фильма
                 _usual.Href = hrefChild[0].Href.Remove(0,9);//ссылнка на фильм
-                _usual.PhotoUrl = photo[0];
+                _usual.PhotoUrl = setting.UrlPhoto+ photo[0];//ссылка фото
                
                 
                 
@@ -73,14 +75,14 @@ namespace TorrentWEB.Core.Parse
             var list = new List<int>();
             var items = document.QuerySelectorAll("a")
                 .Select(atr=>atr.GetAttribute("href")).ToArray().Where(atr=>atr.Contains("page/")).Distinct();
-         
-            
+
+          
             
             foreach (var item in items)
             {
-                var text = item.Trim(new char[]{'/'});
-                text = text.Replace("page/","");
-                 list.Add(int.Parse(text));
+             var number = Regex.Replace(item, "[^0-9]", "");
+
+             list.Add(int.Parse(number));
             }
 
 

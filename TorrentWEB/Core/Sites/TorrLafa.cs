@@ -4,8 +4,10 @@ namespace TorrentWEB.Core.Sites
 {
     public class TorrLafa:ISettingsParse
     {
-        public string BaseUrl { get; set; } = "https://torr.lafa.site/film/";
-        public string Prefix { get; set; }= "page/";
+        public string BaseUrl { get; set; } = "https://tor.lafa.site";
+        public string UrlPhoto { get; set; } = "https://tor.lafa.site";
+        public string PrefixPage { get; set; } = "page/";
+        public string Prefix { get; set; }= "/film/";
         public string Description { get; set; }= "";
         public string ClassPages { get; set; }= "";
         public string ClassItems { get; set; }= "in_cinema";

@@ -1,0 +1,112 @@
+@using TorrentWEB.Components.LittleComponents
+@inject IJSRuntime _runtime
+@inject Blazored.SessionStorage.ISessionStorageService _storageService
+
+<div class="paginator">
+    <button>Назад</button>
+    @{
+        //кот начал писать
+        var averageItem = (MinPage / 2);
+        int leftIndex = 0;
+
+        if (averageItem % 2 == 0)
+        {
+            leftIndex = averageItem / 2;
+        }
+        else
+        {
+            leftIndex = (averageItem / 2);
+        }
+
+        int startIndexLeft = CurrentPage - leftIndex < 0 ? 0 : CurrentPage - leftIndex;
+        int startIndexRight = MaxElements - averageItem;
+
+        if (MaxElements - MinPage > CurrentPage)
+        {
+            for (int i = 0; i < averageItem; i++)
+            {
+                string t = Convert.ToString(startIndexLeft + 1);
+                if (CurrentPage == startIndexLeft)
+                {
+                    <Button ClickChild="@ChangePage"   ClassName="current_page" id="@startIndexLeft" Value="@t"></Button>
+                }
+
+                else
+                {
+                    <Button ClickChild="@ChangePage"   id="@startIndexLeft" Value="@t" />
+                }
+                startIndexLeft++;
+            }
+            <p>
+                ...
+            </p>
+            for (int i = 0; i < averageItem; i++)
+            {
+                int _value = startIndexRight + 1;
+                <Button ClickChild="@ChangePage"   id="@startIndexRight" Value="@_value.ToString()"/>
+                startIndexRight++;
+            }
+        }
+        else
+        {
+            var it = MaxElements - MinPage;
+            for (int i = 0; i < MinPage; i++)
+            {
+                var item = it + 1;
+                if (CurrentPage == it)
+                {
+                    <Button ClickChild="@ChangePage"    ClassName="current_page" id="@it" value="@item.ToString()"/>
+                }
+                else
+                {
+                    <Button ClickChild="@ChangePage"   id="@it" value="@item.ToString()"/>
+                }
+                it++;
+
+            }
+        }
+
+
+    }
+    <button>Далее</button>
+</div>
+
+@code {
+
+    [Parameter]
+    public int MinPage { get; set; } = 10;
+
+    [Parameter]
+    public int CurrentPage { get; set; } = 0;
+
+    [Parameter]
+    public int MaxElements { get; set; } = 29;
+
+    [Parameter]
+    public int Url { get; set; }
+    [Parameter]
+    public Action Update { get; set; }
+
+    int _decreaseValue = 1;
+    int _value = 0;
+
+    protected override void OnInitialized()
+    {
+        var w = 5;
+        base.OnInitialized();
+       
+    }
+
+
+    void ChangePage(int id)
+    {
+        
+     //    _runtime.InvokeVoidAsync("console.log", id);
+       //  var p = 2;
+        CurrentPage =  id;
+         _storageService.SetItemAsync("CurrentPage", id);
+         Update();
+        StateHasChanged();
+    }
+   
+}

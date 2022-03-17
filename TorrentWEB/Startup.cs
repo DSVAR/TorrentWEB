@@ -48,6 +48,7 @@ namespace TorrentWEB
             
             
             services.AddSingleton<Cart>();
+            
        //     services.AddHttpClient(typeof(WeatherForecastService).ToString());
        
             
